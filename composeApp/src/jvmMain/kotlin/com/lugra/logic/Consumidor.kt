@@ -1,4 +1,4 @@
-package logic
+package com.lugra.logic
 
 import java.io.BufferedReader
 import java.io.InputStreamReader

@@ -1,8 +1,8 @@
-package logic
+package com.lugra.logic
 
-class ProductorNumerosAleatorios : Productor {
+class ProdNumerosAleatorios{
 
-    override fun producir() : String {
+    fun producir() : String {
         val numero = (1..100).random()
         return numero.toString()
     }
@@ -15,7 +15,7 @@ fun main (args: Array<String>) {
                                     else 5
                                     // si el argumento no existe, asigna el valor 5
 
-    val productor = ProductorNumerosAleatorios()
+    val productor = ProdNumerosAleatorios()
 
     repeat(cantidadNumerosProducidos) {
         print(productor.producir())
