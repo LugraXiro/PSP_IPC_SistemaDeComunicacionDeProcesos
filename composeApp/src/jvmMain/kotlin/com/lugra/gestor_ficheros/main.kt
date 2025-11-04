@@ -11,10 +11,10 @@ fun main() = application {
     println("Compilación completada.\n")
 
     // Abrir la interfaz principal
-//    Window(
-//        onCloseRequest = ::exitApplication,
-//        title = "PSP_Gestor_De_Ficheros",
-//    ) {
-//        App()
-//    }
+    Window(
+        onCloseRequest = ::exitApplication,
+        title = "PSP_Gestor_De_Ficheros",
+    ) {
+        App()
+    }
 }
