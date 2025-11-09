@@ -18,7 +18,8 @@ fun main (args: Array<String>) {
     val productor = ProdNumerosAleatorios()
 
     repeat(cantidadNumerosProducidos) {
-        print(productor.producir())
+        println(productor.producir())
+        System.out.flush()
         Thread.sleep(300) // espera 0,3 segundos en generar otro número.
                                 // interesante para simular una producción continua y no instantánea de datos
     }

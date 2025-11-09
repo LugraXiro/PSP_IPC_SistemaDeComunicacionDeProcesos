@@ -9,10 +9,12 @@ object Compilador {
 
 
     private val archivosACompilar = listOf(
-        "Consumidor",
         "ProdLetrasAleatorias",
         "ProdNumerosAleatorios",
         "ProdPoemaAleatorio",
+        "ConsLetr",
+        "ConsNum",
+        "ConsPoem",
     )
 
     /**

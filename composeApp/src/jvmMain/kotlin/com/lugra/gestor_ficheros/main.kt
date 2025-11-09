@@ -7,7 +7,7 @@ import com.lugra.logic.Compilador
 fun main() = application {
     // Compilar productores y consumidor antes de abrir interfaz
     println("Iniciando compilación automática de productores y consumidores...")
-    //Compilador.compilarTodo()
+    Compilador.compilarTodo()
     println("Compilación completada.\n")
 
     // Abrir la interfaz principal

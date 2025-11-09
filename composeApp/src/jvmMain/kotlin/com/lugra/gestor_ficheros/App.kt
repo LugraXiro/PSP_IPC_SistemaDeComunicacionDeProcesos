@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lugra.logic.PipeManager
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -77,41 +78,26 @@ fun App() {
                     onClick = {
                         println("Iniciar presionado: $productorSeleccionado")
 
-                        // Mapa para traducir texto a nombre del JAR
-                        val mapa = mapOf(
-                            "Números Aleatorios" to "ProdNumerosAleatorios.jar",
-                            "Letras Aleatorias" to "ProdLetrasAleatorias.jar",
-                            "Poema aleatorio" to "ProdPoemaAleatorio.jar"
+                        // dentro del onClick del botón Iniciar
+                        val pares = mapOf(
+                            "Números Aleatorios" to ("ProdNumerosAleatorios.jar" to "ConsNum.jar"),
+                            "Letras Aleatorias"  to ("ProdLetrasAleatorias.jar"  to "ConsLetr.jar"),
+                            "Poema aleatorio"    to ("ProdPoemaAleatorio.jar"    to "ConsPoem.jar")
                         )
 
-                        val jar = mapa[productorSeleccionado] ?: return@Button
+                        val par = pares[productorSeleccionado] ?: return@Button
+                        val (jarProd, jarCons) = par
 
-                        // Limpia la salida
                         salida = "Ejecutando $productorSeleccionado...\n\n"
 
-                        // Lanza la ejecución en un hilo separado para no bloquear la UI
                         Thread {
-                            try {
-                                val proceso = ProcessBuilder(
-                                    "java", "-jar",
-                                    "composeApp/src/jvmMain/kotlin/com/lugra/ejecutables/$jar",
-                                    "4" // elementos generados
-                                ).redirectErrorStream(true).start()
-
-                                // Leer salida en tiempo real
-                                val reader = proceso.inputStream.bufferedReader()
-                                reader.lines().forEach { linea ->
-                                    // Actualiza el texto mostrado en Compose
-                                    salida += "$linea\n"
-                                }
-
-                                proceso.waitFor()
-                                salida += "\nEjecución completada.\n"
-
-                            } catch (e: Exception) {
-                                salida += "\nError al ejecutar: ${e.message}\n"
+                            PipeManager.ejecutar(jarProd, jarCons, cantidad = "5") { linea ->
+                                // actualizar estado UI
+                                salida += linea + "\n"
                             }
                         }.start()
+
+
 
 
 
