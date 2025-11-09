@@ -22,8 +22,9 @@ fun App() {
     MaterialTheme {
         Row(Modifier.fillMaxSize()) {
             val productores = listOf(
-                "Productor de Números Aleatorios",
-                "Productor de Letras Aleatorias"
+                "Números Aleatorios",
+                "Letras Aleatorias",
+                "Poema aleatorio",
             )
             var productorSeleccionado by remember { mutableStateOf(productores.first()) }
             var salida by remember { mutableStateOf("Esperando datos...\n") }
@@ -75,6 +76,48 @@ fun App() {
                 Button(
                     onClick = {
                         println("Iniciar presionado: $productorSeleccionado")
+
+                        // Mapa para traducir texto a nombre del JAR
+                        val mapa = mapOf(
+                            "Números Aleatorios" to "ProdNumerosAleatorios.jar",
+                            "Letras Aleatorias" to "ProdLetrasAleatorias.jar",
+                            "Poema aleatorio" to "ProdPoemaAleatorio.jar"
+                        )
+
+                        val jar = mapa[productorSeleccionado] ?: return@Button
+
+                        // Limpia la salida
+                        salida = "Ejecutando $productorSeleccionado...\n\n"
+
+                        // Lanza la ejecución en un hilo separado para no bloquear la UI
+                        Thread {
+                            try {
+                                val proceso = ProcessBuilder(
+                                    "java", "-jar",
+                                    "composeApp/src/jvmMain/kotlin/com/lugra/ejecutables/$jar",
+                                    "4" // elementos generados
+                                ).redirectErrorStream(true).start()
+
+                                // Leer salida en tiempo real
+                                val reader = proceso.inputStream.bufferedReader()
+                                reader.lines().forEach { linea ->
+                                    // Actualiza el texto mostrado en Compose
+                                    salida += "$linea\n"
+                                }
+
+                                proceso.waitFor()
+                                salida += "\nEjecución completada.\n"
+
+                            } catch (e: Exception) {
+                                salida += "\nError al ejecutar: ${e.message}\n"
+                            }
+                        }.start()
+
+
+
+
+
+
                     },
                     modifier = Modifier
                         .fillMaxWidth()

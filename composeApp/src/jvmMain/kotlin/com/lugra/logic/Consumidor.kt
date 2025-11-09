@@ -6,45 +6,40 @@ import java.io.InputStreamReader
 fun main() {
     val reader = BufferedReader(InputStreamReader(System.`in`))
     var suma = 0
+    var contadorLetras = 0
+    var contadorVersos = 0
+
     var linea: String?
-    /*
-    linea: String? significa que puede ser nulo.
-     */
+    while (reader.readLine().also { linea = it } != null) {
+        val valor = linea!!.trim()
 
-    while (reader.readLine().also { linea = it } != null){
-        /*
-        reader.readLine() -> lee una línea desde la entrada estándar (stdin)
-            devuelve null cuando ya no hay más datos (cuando por ejemplo el productor termina y se cierra de golpe
+        when {
+            // Caso 1: número entero
+            valor.toIntOrNull() != null -> {
+                val numero = valor.toInt()
+                suma += numero
+                println("Recibido número: $numero | Total parcial: $suma")
+            }
 
-        .also { linea=it } -> also ejecuta {} con el valor recién leído (it) sin interrumpir el flujo
-            En este caso, sirve para guardar el valor den la variable linea.
-            Equivale a:
-                linea = reader.readLine()
-                while (linea != null) {
-                    ...
-                    linea = reader.readLine()
-                }
+            // Caso 2: letras individuales (A-Z o a-z)
+            valor.matches(Regex("[A-Za-z]")) -> {
+                contadorLetras++
+                println("Recibida letra: $valor | Total letras: $contadorLetras")
+            }
 
-         */
-        val numero = linea!!.toIntOrNull()
-        /*
-        linea!! -> fuerza a usar el valor no nulo (porque sabemos que si entró al bucle, no es null)
-        .toIntOrNull() -> intenta convertir el texto a entero; si no puede, devuelve null.
-         */
-        if (numero != null) {
-            suma += numero
-            println("Recibido: $numero | Total parcial: $suma")
+            // Caso 3: verso o frase (contiene espacios o palabras)
+            valor.contains(" ") -> {
+                contadorVersos++
+                println("Verso recibido #$contadorVersos: \"$valor\"")
+            }
+
+            // Caso no identificado
+            else -> println("Dato no reconocido: $valor")
         }
-
-        /*
-        QUÉ HACE EL BUCLE:
-            Lee continuamente líneas de texto.
-            Guarda cada línea en linea.
-            Si la línea no es null, la intenta convertir a número.
-            Si es válida, la suma.
-            Cuando el productor termina (no hay más datos → null), el bucle finaliza.
-         */
     }
 
-    println("Suma final: $suma")
+    println("\n--- Resumen final ---")
+    println("Suma total de números: $suma")
+    println("Total de letras: $contadorLetras")
+    println("Total de versos: $contadorVersos")
 }

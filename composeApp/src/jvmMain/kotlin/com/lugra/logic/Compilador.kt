@@ -12,6 +12,7 @@ object Compilador {
         "Consumidor",
         "ProdLetrasAleatorias",
         "ProdNumerosAleatorios",
+        "ProdPoemaAleatorio",
     )
 
     /**
