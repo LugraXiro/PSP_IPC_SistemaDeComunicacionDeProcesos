@@ -12,15 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lugra.logic.PipeManager
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
+        val fuenteUTF8 = FontFamily(Font("fonts/JetBrainsMono-Regular.ttf"))
         Row(Modifier.fillMaxSize()) {
             val productores = listOf(
                 "Números Aleatorios",
@@ -130,7 +133,7 @@ fun App() {
                     Text(
                         salida,
                         color = Color(0xFF00FF00),
-                        fontFamily = FontFamily.Monospace,
+                        fontFamily = fuenteUTF8,
                         fontSize = 14.sp
                     )
                 }

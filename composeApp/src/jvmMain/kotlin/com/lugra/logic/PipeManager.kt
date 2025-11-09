@@ -40,7 +40,7 @@ object PipeManager {
             pipeThread.start()
 
             // Leer salida del consumidor línea a línea, en tiempo real
-            val reader = BufferedReader(InputStreamReader(consumidor.inputStream))
+            val reader = BufferedReader(InputStreamReader(consumidor.inputStream, Charsets.UTF_8))
             var linea: String?
             while (reader.readLine().also { linea = it } != null) {
                 onOutput(linea!!)

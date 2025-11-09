@@ -28,6 +28,9 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
         }
+        val jvmMain by getting {
+            resources.srcDir("src/jvmMain/resources")
+        }
     }
 }
 

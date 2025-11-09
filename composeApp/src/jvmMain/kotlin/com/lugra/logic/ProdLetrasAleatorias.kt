@@ -10,13 +10,14 @@ class ProdLetrasAleatorias {
 }
 
 fun main(args: Array<String>) {
-    val cantidadLetrasProducidas = if (args.isNotEmpty()) args[0].toIntOrNull() ?: 5
-    else 5
+    val cantidadLetrasProducidas = if (args.isNotEmpty()) args[0].toIntOrNull() ?: 4
+    else 4
 
     val productor = ProdLetrasAleatorias()
 
     repeat(cantidadLetrasProducidas) {
-        print(productor.producir())
+        println(productor.producir())
+        System.out.flush()
         Thread.sleep(300) // simula una producción continua, no instantánea
     }
 }

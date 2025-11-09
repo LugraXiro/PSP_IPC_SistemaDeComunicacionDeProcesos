@@ -12,16 +12,21 @@ fun main() {
 
     val inBuf = BufferedReader(InputStreamReader(System.`in`))
     var count = 0
+    var combinacion = ""
     var line: String?
 
     while (inBuf.readLine().also { line = it } != null) {
         val v = line!!.trim()
         if (v.matches(Regex("[A-Za-z]"))) {
             count++
-            println("Letra recibida: $v | Total letras: $count")
+            combinacion += v
+            println("Letra recibida: $v | Combinación: $combinacion | Conteo $count")
+            System.out.flush()
+            Thread.sleep(300)
         }
     }
 
+    println("\nCombinación de letas final: $combinacion")
     println("\nTotal de letras: $count")
     println("[ConsumidorLetras] Finalizado.")
 }

@@ -19,6 +19,8 @@ fun main() {
         if (v.isNotEmpty()) {
             versos++
             println("Verso #$versos: \"$v\"")
+            System.out.flush()
+            Thread.sleep(700)
         }
     }
 
