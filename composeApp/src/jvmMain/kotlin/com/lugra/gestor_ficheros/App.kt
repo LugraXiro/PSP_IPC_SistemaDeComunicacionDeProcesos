@@ -76,10 +76,36 @@ fun App() {
                 // Espaciador para empujar el botón al fondo
                 Spacer(modifier = Modifier.weight(1f))
 
+                // Variable para cantidad de datos
+                var cantidadText by remember { mutableStateOf("5") }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+// Campo de texto para cantidad
+                OutlinedTextField(
+                    value = cantidadText,
+                    onValueChange = { nueva ->
+                        if (nueva.all { it.isDigit() } || nueva.isEmpty()) cantidadText = nueva
+                    },
+                    label = { Text("Cantidad de datos") },
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color.Gray,
+                        focusedLabelColor = Color.White,
+                        unfocusedLabelColor = Color.LightGray,
+                        cursorColor = Color.White
+                    ),
+                    textStyle = LocalTextStyle.current.copy(color = Color.White)
+                )
+
                 // Botón INICIAR
                 Button(
                     onClick = {
-                        println("Iniciar presionado: $productorSeleccionado")
+                        println("Iniciar presionado: $productorSeleccionado con $cantidadText datos")
 
                         // dentro del onClick del botón Iniciar
                         val pares = mapOf(
@@ -94,18 +120,11 @@ fun App() {
                         salida = "Ejecutando $productorSeleccionado...\n\n"
 
                         Thread {
-                            PipeManager.ejecutar(jarProd, jarCons, cantidad = "5") { linea ->
+                            PipeManager.ejecutar(jarProd, jarCons, cantidad = cantidadText.ifBlank { "5" }) { linea ->
                                 // actualizar estado UI
                                 salida += linea + "\n"
                             }
                         }.start()
-
-
-
-
-
-
-
 
                     },
                     modifier = Modifier
