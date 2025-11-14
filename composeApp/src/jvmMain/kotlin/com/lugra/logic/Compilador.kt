@@ -1,9 +1,16 @@
 package com.lugra.logic
 
 import java.io.File
+import com.lugra.logic.getOS
 
 object Compilador {
-    private const val KOTLINC = "C:\\Program Files\\Kotlin\\kotlinc\\bin\\kotlinc.bat"
+    private val KOTLINC: String =
+        when (getOS()) {
+            OS.WINDOWS -> "C:\\Program Files\\Kotlin\\kotlinc\\bin\\kotlinc.bat"
+            OS.LINUX   -> "kotlinc"
+            OS.MACOS   -> "/usr/local/bin/kotlinc"
+            OS.UNKNOWN -> "kotlinc"
+        }
     private const val RUTA_FUENTE = "composeApp/src/jvmMain/kotlin/com/lugra/logic"
     private const val OUTPUT_DIR = "composeApp/src/jvmMain/kotlin/com/lugra/ejecutables"
 
