@@ -28,7 +28,7 @@ fun App() {
             val productores = listOf(
                 "Números Aleatorios",
                 "Letras Aleatorias",
-                "Poema aleatorio",
+                "Poema Aleatorio",
             )
             var productorSeleccionado by remember { mutableStateOf(productores.first()) }
             var salida by remember { mutableStateOf("Esperando datos...\n") }
@@ -111,7 +111,7 @@ fun App() {
                         val pares = mapOf(
                             "Números Aleatorios" to ("ProdNumerosAleatorios.jar" to "ConsNum.jar"),
                             "Letras Aleatorias"  to ("ProdLetrasAleatorias.jar"  to "ConsLetr.jar"),
-                            "Poema aleatorio"    to ("ProdPoemaAleatorio.jar"    to "ConsPoem.jar")
+                            "Poema Aleatorio"    to ("ProdPoemaAleatorio.jar"    to "ConsPoem.jar")
                         )
 
                         val par = pares[productorSeleccionado] ?: return@Button

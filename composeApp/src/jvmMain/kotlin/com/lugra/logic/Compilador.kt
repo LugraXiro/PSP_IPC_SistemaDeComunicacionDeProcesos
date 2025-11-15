@@ -6,7 +6,7 @@ import com.lugra.logic.getOS
 object Compilador {
     private val KOTLINC: String =
         when (getOS()) {
-            OS.WINDOWS -> "C:\\Program Files\\Kotlin\\kotlinc\\bin\\kotlinc.bat"
+            OS.WINDOWS -> "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2.2\\plugins\\Kotlin\\kotlinc\\bin\\kotlinc.bat"
             OS.LINUX   -> "kotlinc"
             OS.MACOS   -> "/usr/local/bin/kotlinc"
             OS.UNKNOWN -> "kotlinc"
@@ -67,7 +67,7 @@ object Compilador {
         println("Compilando: $archivoFuente -> $salidaJar")
 
         // Ruta base del compilador Kotlin instalado en tu sistema
-        val kotlinHome = "C:\\Program Files\\Kotlin\\kotlinc"
+        val kotlinHome = "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2.2\\plugins\\Kotlin\\kotlinc"
         val cp = listOf(
             "$kotlinHome\\lib\\kotlin-stdlib.jar",
             "$kotlinHome\\lib\\kotlin-stdlib-jdk7.jar",
